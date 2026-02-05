@@ -27,18 +27,24 @@
     </header>
     <main>
       <div class="container mt-5">
-        <h1>Adding Employee ...</h1>
+        <h1>Updating Employee Details...</h1>
         <form
           class="form"
-          th:action="@{/add}"
+          th:action="@{'/update/' + ${employee.id}}"
           th:object="${employee}"
-          method="post"
+          method="POST"
         >
           <!-- Form for adding students -->
 
           <div>
             <label for="id">Employee ID: </label><br />
-            <input type="number" id="id" name="id" disabled /><br /><br />
+            <input
+              type="number"
+              id="id"
+              name="id"
+              disabled
+              th:value="${employee.id}"
+            /><br /><br />
           </div>
 
           <div>
@@ -46,9 +52,8 @@
             <input
               type="text"
               id="name"
-              name="name"
+              th:field="*{name}"
               required
-              placeholder="${employee.name}"
             /><br /><br />
           </div>
 
@@ -57,18 +62,23 @@
             <input
               type="text"
               id="dept"
-              name="department"
               required
-              placeholder="${employee.department}"
+              th:field="*{department}"
             /><br /><br />
           </div>
 
           <div>
             <label for="salary">Salary: </label><br />
-            <input type="number" id="name" name="salary" required /><br /><br />
+            <input
+              type="number"
+              id="salary"
+              th:field="*{salary}"
+              required
+            /><br /><br />
           </div>
 
-          <button class="btn btn-primary btn-sm">Submit</button>
+          <button class="btn btn-primary btn-sm">Update</button>
+          <a class="btn btn-secondary btn-sm" th:href="@{/}">Cancel</a>
         </form>
       </div>
     </main>

@@ -27,11 +27,15 @@ public class EmployeeService {
         return repo.findById(id).orElse(null);
     }
 
-    public void update(Long id, Employee updatedEmployee){
-        Employee emp = repo.findById(id).orElse(new Employee());
-        emp.setName(updatedEmployee.getName());
-        emp.setDepartment(updatedEmployee.getDepartment());
-        emp.setSalary(updatedEmployee.getSalary()); 
+    public void update(Long id,Employee updatedEmployee){
+        if(id!=null && repo.existsById(id)){
+            updatedEmployee.setId(id);
+            repo.save(updatedEmployee);
+        }
+        // Employee emp = repo.findById(updatedEmployee.getId()).orElse(new Employee());
+        // emp.setName(updatedEmployee.getName());
+        // emp.setDepartment(updatedEmployee.getDepartment());
+        // emp.setSalary(updatedEmployee.getSalary()); 
         return;
     }
 
@@ -42,5 +46,4 @@ public class EmployeeService {
         }
         return;
     }
-
 }

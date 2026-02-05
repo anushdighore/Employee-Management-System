@@ -27,7 +27,7 @@
     </header>
     <main>
       <div class="container mt-5">
-        <h1>Dahsboard</h1>
+        <h1>Dashboard</h1>
 
         <a class="btn btn-primary mt-3" th:href="@{/form}"> + Add Employee </a>
 
@@ -57,7 +57,6 @@
               <td>
                 <a
                   th:href="@{'/delete/' + ${employee.id}}"
-                  
                   class="btn btn-sm btn-danger"
                   >Delete</a
                 >

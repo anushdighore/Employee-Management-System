@@ -2,13 +2,10 @@ package com.example.MySpringProject.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.MySpringProject.services.EmployeeService;
 
@@ -24,8 +21,7 @@ public class HomeController {
     private EmployeeService service;
 
     /**
-     * CRUD
-     * R = Reading Data form database.
+     * CRUD - Read Operation
      * @param model
      * @return
      */
@@ -40,13 +36,12 @@ public class HomeController {
     }
 
     /**
-     * CURD
-     * C = Creating new Employee.
-     * Adding Employee Process : 
-     * Step 1 : Add Employee Button Click.
-     * Step 2 : Redirect to Form Filling.
-     * Step 3 : Form send's Detail to Controller to be saved.
-     * Step 4 : Redirect to Home Page.
+     * CURD - Create Operation
+     * Process : 
+     * Step 1: Add Employee Button Click.
+     * Step 2: GET /form, Inject Model, Redirect to Form Filling with empty object.
+     * Step 3: POST /add, Form send's Detail to Controller to be saved.
+     * Step 4: Redirect to Home Page.
      * @param emp
      */
 
@@ -62,9 +57,8 @@ public class HomeController {
     }
 
     /**
-     * CRUD
-     * D = Deleting Employee from database.
-     * Deleting Employee Process : 
+     * CRUD - Delete Operation
+     * Process: 
      * Step 1: Click Delete Button
      * Step 2: Send id to Controller via Path Variable.
      * Step 3: Delete Employee
@@ -80,21 +74,28 @@ public class HomeController {
         return "redirect:/";
     }
 
-/**
- * CRUD 
- * U = Updating Employee Details.
- * @param emp
- * @param id
- * @return
-*/
+    /**
+     * CRUD - Update Operation
+     * Process : 
+     * Step 1: Click Edit button
+     * Step 2: GET /edit, Inject Model, get the Object via id
+     * Step 3: Redirect to "update form" with data.
+     * Step 4: POST /update
+     * @param emp
+     * @param id
+     * @return
+    */
 
-
-
-    @PutMapping("/edit/{id}")
-    public String updateEmployee(@RequestBody Employee emp, @PathVariable Long id){
-        return "update";
+    @GetMapping("/edit/{id}")
+    public String showEditPage(@PathVariable Long id, Model model){
+        Employee emp = service.find(id);
+        model.addAttribute("employee", emp);
+        return "edit";
     }
-
-
+    @PostMapping("/update/{id}")
+    public String updateEmployee(@ModelAttribute Employee emp, @PathVariable Long id){
+        service.update(id,emp);
+        return "redirect:/";
+    }
 
 }
