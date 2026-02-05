@@ -1,0 +1,82 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Home - EMS</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand">Employee Management System</span>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/}"> Home </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container mt-5">
+        <h1>Adding Employee ...</h1>
+        <form
+          class="form"
+          th:action="@{/add}"
+          th:object="${employee}"
+          method="post"
+        >
+          <!-- Form for adding students -->
+
+          <div>
+            <label for="name">Name: </label><br />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="full name"
+            /><br /><br />
+          </div>
+
+          <div>
+            <label for="dept">Department: </label><br />
+            <input
+              type="text"
+              id="dept"
+              name="department"
+              required
+              placeholder="department"
+            /><br /><br />
+          </div>
+
+          <div>
+            <label for="salary">Salary: </label><br />
+            <input
+              type="number"
+              id="name"
+              name="salary"
+              required
+              placeholder="salary"
+            /><br /><br />
+          </div>
+
+          <button class="btn btn-primary btn-sm">Submit</button>
+        </form>
+      </div>
+    </main>
+    <footer class="text-center">
+      <p>&copy; 2026 Employee Management System</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

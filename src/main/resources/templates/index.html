@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Home - EMS</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand">Employee Management System</span>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/}"> Home </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container mt-5">
+        <h1>Dahsboard</h1>
+
+        <a class="btn btn-primary mt-3" th:href="@{/form}"> + Add Employee </a>
+
+        <table class="table mt-3">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Salary</th>
+              <th colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="employee: ${list}">
+              <td th:text="${employee.id}">ID</td>
+              <td th:text="${employee.name}">Name</td>
+              <td th:text="${employee.department}">Student ID</td>
+              <td th:text="${employee.salary}">Student ID</td>
+              <td>
+                <a
+                  th:href="@{'/edit/'+ ${employee.id}}"
+                  class="btn btn-sm btn-warning"
+                  >Edit</a
+                >
+              </td>
+              <td>
+                <a
+                  th:href="@{'/delete/' + ${employee.id}}"
+                  
+                  class="btn btn-sm btn-danger"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <footer class="text-center">
+      <p>&copy; 2026 Employee Management System</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
